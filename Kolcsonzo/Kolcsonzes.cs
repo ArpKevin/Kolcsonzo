@@ -11,11 +11,12 @@ namespace Kolcsonzo
         public string Nev { get; set; }
         public byte HajoAzonosito { get; set; }
         public string HajoTipus { get; set; }
-        public byte SzemelyekSzama { get; set; }
+        public int SzemelyekSzama { get; set; }
         public byte ElvitelOraja { get; set; }
         public byte ElvitelPerce { get; set; }
         public byte VisszahozatalOraja { get; set; }
         public byte VisszahozatalPerce { get; set; }
+        public double HajoHasznalatSzemelyenkentFelOrara => 1500 / SzemelyekSzama;
 
         public Kolcsonzes(string sor) {
             var x = sor.Split(";");

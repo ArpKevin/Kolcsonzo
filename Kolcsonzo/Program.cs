@@ -40,6 +40,29 @@ namespace Kolcsonzo
 
             Console.WriteLine($"{kolcsonzesek.Count - kulfoldiek} magyar, {kulfoldiek} külföldi volt aznap.");
 
+            // -- dolgozat
+
+            using StreamWriter sw = new StreamWriter(@"..\..\..\src\szemelyenkent.txt");
+
+            foreach (var item in kolcsonzesek)
+            {
+                sw.WriteLine($"Azonosító: {item.HajoAzonosito}, Személyek száma: {item.SzemelyekSzama}, Egy személyre ennyibe kerül a hajó egyszer fél órára: {item.HajoHasznalatSzemelyenkentFelOrara} Ft.");
+            }
+
+            Console.WriteLine("A fájlbeírás megtörtént.\n");
+
+            Console.Write("Add meg a hajó személyszámát: ");
+            int bekertSzemelyszam = int.Parse(Console.ReadLine());
+
+            Console.WriteLine(kolcsonzesek.Where(k => k.SzemelyekSzama == bekertSzemelyszam).OrderBy(k => k.ElvitelOraja).ThenBy(k => k.ElvitelPerce).First().HajoAzonosito);
+            Console.WriteLine("\n");
+
+            for (int i = 1; i <= 4; i++)
+            {
+                var ennyiSzemelyesHajok = kolcsonzesek.Where(k => k.SzemelyekSzama == i);
+                if (ennyiSzemelyesHajok.Count() == 0) Console.WriteLine($"A(z) {i} személyes hajóból nem történt ma kölcsönzés.");
+            }
+
             Console.ReadKey();
         }
     }
